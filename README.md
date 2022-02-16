@@ -9,3 +9,5 @@ This is only the client side of the project. Graphql can be get from the tutoria
 - Finished "Intro to GraphQL" part 
 - Finished "Fetching data with queries" part
 - Finished "Improving Developer Experience" part 
+- Finished "Query variables, handling loading & errors" part
+- Finished "Advanced queries" part
