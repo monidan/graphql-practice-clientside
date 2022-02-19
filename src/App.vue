@@ -5,30 +5,45 @@ import { useQuery, useResult } from '@vue/apollo-composable';
 import ALL_BOOKS_QUERY from './graphql/allBooks.query.gql';
 
 import EditRating from './components/EditRating.vue';
+import AddBook from './components/AddBook.vue';
 
 export default {
   name: 'App',
   components: {
-    EditRating
+    EditRating,
+    AddBook
   },
   setup() {
     const searchTerm = ref('');
     const activeBook = ref(null);
+    const showNewBookForm = ref(false);
+
     const { result, loading, error } = useQuery(
       ALL_BOOKS_QUERY, 
       () => ({ search: searchTerm.value }),
-      () => ({ debounce: 500, enabled: searchTerm.value.length > 2 })
+      () => ({ debounce: 500, })
     );
 
     const books = useResult(result, [], data => data.allBooks);
 
-    return { books, searchTerm, loading, error, activeBook };
+    return { books, searchTerm, loading, error, activeBook, showNewBookForm };
   },
 }
 </script>
 
 <template>
   <div>
+    <div>
+      <button v-if="!showNewBookForm" @click="showNewBookForm = true">
+        Add a new book
+      </button>
+      <add-book
+        v-if="showNewBookForm"
+        :search="searchTerm"
+        @closeForm="showNewBookForm = false"
+      ></add-book>
+    </div>
+
     <input type="text" v-model="searchTerm">
     <p v-if="loading">loading...</p>
     <p v-else-if="error">Something wrong!</p>

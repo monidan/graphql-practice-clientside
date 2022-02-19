@@ -11,3 +11,4 @@ This is only the client side of the project. Graphql can be get from the tutoria
 - Finished "Improving Developer Experience" part 
 - Finished "Query variables, handling loading & errors" part
 - Finished "Advanced queries" part
+- Finished "Updating data with mutations" part
